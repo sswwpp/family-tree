@@ -1,8 +1,9 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import AddMember from "./components/AddMember";
 import FamilyTree from "./components/FamilyTree";
+import AddMember from "./components/AddMember";
 import Search from "./components/Search";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (

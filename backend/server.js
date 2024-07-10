@@ -5,7 +5,7 @@ const familyRoutes = require("./routes/family");
 
 const app = express();
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors()); // Add this line to enable CORS
 
 app.use("/api/family", familyRoutes);
 

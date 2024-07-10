@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { Form, Button } from "react-bootstrap";
 
 const Search = () => {
   const [query, setQuery] = useState("");
@@ -17,14 +18,17 @@ const Search = () => {
   return (
     <div>
       <h2>Search Family Members</h2>
-      <form onSubmit={handleSearch}>
-        <input
-          type="text"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-        />
-        <button type="submit">Search</button>
-      </form>
+      <Form onSubmit={handleSearch}>
+        <Form.Group>
+          <Form.Control
+            type="text"
+            placeholder="Search by name"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
+        </Form.Group>
+        <Button type="submit">Search</Button>
+      </Form>
       <ul>
         {results.map((member) => (
           <li key={member.id}>{member.name}</li>
