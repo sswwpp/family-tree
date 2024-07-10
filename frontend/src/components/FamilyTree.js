@@ -88,13 +88,12 @@ const FamilyTree = () => {
     }));
   };
 
-  const renderCustomNodeElement = (rd3tProps) => {
-    const { nodeDatum } = rd3tProps;
+  const renderCustomNodeElement = ({ nodeDatum, toggleNode }) => {
     const name = nodeDatum.name || "";
     const color = nodeDatum.attributes?.color || "#000000"; // Use optional chaining and provide a default color
 
     return (
-      <g>
+      <g onClick={() => handleNodeClick(nodeDatum)}>
         <circle r={15} fill={color} />
         <text fill="black" strokeWidth="1" x="20">
           {name}
@@ -104,11 +103,14 @@ const FamilyTree = () => {
   };
 
   const handleNodeClick = (nodeData) => {
-    setSelectedMember({
-      ...nodeData.attributes,
-      name: nodeData.name,
-    });
-    setShowDetailsModal(true);
+    console.log("Node clicked:", nodeData); // Debugging statement
+    if (nodeData && nodeData.attributes) {
+      setSelectedMember({
+        ...nodeData.attributes,
+        name: nodeData.name,
+      });
+      setShowDetailsModal(true);
+    }
   };
 
   const handleColorChange = (color) => {
@@ -125,7 +127,7 @@ const FamilyTree = () => {
           orientation="vertical"
           translate={{ x: 300, y: 100 }}
           renderCustomNodeElement={renderCustomNodeElement}
-          onNodeClick={handleNodeClick}
+          onNodeClick={handleNodeClick} // Ensure this prop is passed
         />
       </div>
 
@@ -147,7 +149,7 @@ const FamilyTree = () => {
               <Form.Label>Parent ID</Form.Label>
               <Form.Control
                 type="text"
-                value={newMemberParentId}
+                value={newMemberParentId || ""}
                 onChange={(e) => setNewMemberParentId(e.target.value)}
               />
             </Form.Group>
